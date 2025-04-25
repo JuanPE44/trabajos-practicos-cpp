@@ -1,3 +1,8 @@
+/*
+Pedir al usuario que ingrese un valor N natural. Crear un arreglo de N enteros,
+llenarlo con valores aleatorios entre 1 y 100 e imprimirlo.
+*/
+
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
