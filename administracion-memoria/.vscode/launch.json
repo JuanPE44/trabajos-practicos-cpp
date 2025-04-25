@@ -1,15 +1,14 @@
 {
   "version": "0.2.0",
   "configurations": [
-    
     {
       "name": "Debug C++",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/ejercicio1.out",  // Asegúrate de que este archivo exista
+      "program": "${fileDirname}/${fileBasenameNoExtension}.out",
       "args": [],
       "stopAtEntry": false,
-      "cwd": "${workspaceFolder}",
+      "cwd": "${fileDirname}",
       "environment": [],
       "externalConsole": false,
       "MIMode": "gdb",
@@ -21,7 +20,7 @@
           "ignoreFailures": true
         }
       ],
-      "preLaunchTask": "build"  // Asegúrate de que se refiere a la tarea correcta
+      "preLaunchTask": "build"
     }
   ]
 }
