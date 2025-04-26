@@ -14,6 +14,12 @@ struct Nodo
   Nodo *siguiente;
 };
 
+struct Lista
+{
+  Nodo *primero = nullptr;
+  Nodo *ultimo = nullptr;
+};
+
 void insertarInicio(Nodo *&ptr_primero, int n)
 {
   // Nodo nodo = {n, ptr_primero}; Se destruye al salir
