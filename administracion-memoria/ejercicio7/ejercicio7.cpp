@@ -96,7 +96,7 @@ int buscarEnArreglo(int *arreglo, int numero, int MAX)
 Nodo *buscarEnLista(Nodo *primero, int numero)
 {
   Nodo *actual = primero;
-  while (actual->n != numero && actual->siguiente != nullptr)
+  while (actual != nullptr)
   {
     if (actual->n == numero)
       return actual;
@@ -128,5 +128,6 @@ int main()
   Nodo *p1 = buscarEnLista(primero, 5);
   mostrarArreglo(arreglo, MAX);
   mostrarLista(primero);
+  cout << p1->n << endl;
   return 0;
 }
