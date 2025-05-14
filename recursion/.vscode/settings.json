@@ -6,6 +6,7 @@
     "*.mjs": "javascript",
     "*.css": "css",
     "*.tsx": "typescriptreact",
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "iostream": "cpp"
   }
 }
