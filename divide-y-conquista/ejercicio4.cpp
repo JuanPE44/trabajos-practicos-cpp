@@ -9,34 +9,64 @@ Implemente un algoritmo en C++ que resuelva el problema en un tiempo O(log n).
 #include <iostream>
 #include <algorithm>
 using namespace std;
-int MAX = 7;
 
-int encontrarMediana(int arr1[], int arr2[], int inicio1, int fin1, int inicio2, int fin2)
+int mediana(int a1[], int mina1, int maxa1, int a2[], int mina2, int maxa2)
 {
+  if (maxa1 - mina1 > 2)
+  { // Caso general
+    int med = (maxa1 - mina1) / 2;
+    int posa1 = mina1 + med;
+    int posa2 = mina2 + med;
 
-    if (fin1 - inicio1 == 1 && fin2 - inicio2 == 1)
-  {
-    return max({arr1[inicio1], arr1[fin1], arr2[inicio2], arr2[fin2]});
+    if (a1[posa1] == a2[posa2])
+    {
+      return a1[posa1];
+    }
+    else if (a1[posa1] < a2[posa2])
+    {
+      return mediana(a1, mina1 + med, maxa1, a2, mina2, maxa2 - med);
+    }
+    else
+    {
+      return mediana(a1, mina1, maxa1 - med, a2, mina2 + med, maxa2);
+    }
   }
-
-  int m1 = (fin1 - inicio1) / 2 + inicio1;
-  int m2 = (fin2 - inicio2) / 2 + inicio2;
-
-  if (arr1[m1] > arr2[m2])
-  {
-    return encontrarMediana(arr1, arr2, inicio1, m1, m2, fin2);
+  else if (maxa1 - mina1 == 2)
+  { // Dos elementos
+    if (a1[maxa1 - 1] < a2[mina2])
+    {
+      return a1[maxa1 - 1];
+    }
+    else if (a2[maxa2 - 1] < a1[mina1])
+    {
+      return a2[maxa2 - 1];
+    }
+    else
+    {
+      return max(a1[mina1], a2[mina2]);
+    }
   }
   else
-  {
-    return encontrarMediana(arr1, arr2, m1, fin1, inicio2, m2);
+  { // Un solo elemento
+    if (a1[mina1] < a2[mina2])
+    {
+      return min(a1[mina1], a2[mina2]);
+    }
+    else
+    {
+      return min(a2[mina2], a1[mina1]);
+    }
   }
 }
 
 int main()
 {
-  int arr1[] = {1, 3, 20, 50, 77, 120, 122};
-  int arr2[] = {0, 2, 4, 6, 7, 10, 13};
-  int i = encontrarMediana(arr1, arr2, 0, MAX - 1, 0, MAX - 1);
-  cout << i << endl;
+  int a1[] = {1, 3, 5, 7};
+  int a2[] = {2, 4, 6, 8};
+
+  int n = sizeof(a1) / sizeof(a1[0]);
+  int median = mediana(a1, 0, n - 1, a2, 0, n - 1);
+  cout << "La mediana es: " << median << endl;
+
   return 0;
 }
