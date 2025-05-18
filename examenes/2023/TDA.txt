@@ -35,12 +35,19 @@ END-CLASS
 // PREGUNTAS
 
 // En un arreglo con tamaño definido, ese tamaño es el dominio? agregarElemento es un contructor?
+
 // Como funciona imports? datos de entrada o datos que me van a retornar? 
+
 // pre siempre es necesario? no tener un pre puede romper algo?
+
 // A que nivel se aplica la encapsulacion? aca se define la encapsulacion? como trabajarla?
+
 // Al pasar a c++ en el template hay que definir las funciones?
+
 // Que es el header? entra en el parcial?
+
 // Teoria de TDA puede entrar al parcial?
+
 // Hay que saber de memoria quicksort y mergesort
 
 // Los if en los axiomas se usan en los arboles normalmente? cuando hay que usarlos?
