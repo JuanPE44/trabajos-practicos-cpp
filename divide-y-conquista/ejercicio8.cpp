@@ -10,84 +10,92 @@ en la señal medida.
 b) Determinar la complejidad temporal y analizar qué ocurre si todos los valores del arreglo
 fueran positivos. ¿Es necesario aplicar la misma técnica en ese caso o existe una solución más
 simple?
+
+maxArr(arr, inicio, fin) {
+  // caso base
+  si (inicio == fin)
+    return arr[inicio]
+
+  mitad = inicio + (fin-inicio) / 2
+
+  max_izq = maxArr(arr, inicio, mitad)
+  max_der = maxArr(arr, mitad+1, fin)
+  max_mitad = calcMaxMitad(arr, mitad, inicio, fin)
+
+   return max(max_izq, max_der, max_mitad)
+}
+
+calcMaxMitad(arr, mitad, inicio, fin) {
+    suma ← 0
+    max_izquierda ← -infinito
+    Para i desde mitad - 1 hasta inicio (en reversa):
+        suma ← suma + arr[i]
+        Si suma > max_izquierda:
+            max_izquierda ← suma
+
+    suma ← 0
+    max_derecha ← -infinito
+    Para i desde mitad hasta fin
+        suma ← suma + arr[i]
+        Si suma > max_derecha:
+            max_derecha ← suma
+
+    Retornar max_izquierda + max_derecha
+}
 */
 
 #include <iostream>
-#include <vector>
+#include <algorithm>
 #include <climits>
+
 using namespace std;
 
-struct Resultado
+int sumaMaxMid(int arr[], int mid, int inicio, int fin)
 {
-  int max_suma;
-  int inicio;
-  int fin;
-};
-
-Resultado maxCruza(const vector<int> &arr, int izq, int mid, int der)
-{
-  int suma_izq = INT_MIN, suma_temp = 0;
-  int max_izq = mid;
-  for (int i = mid; i >= izq; i--)
+  // sum izq
+  int suma = 0;
+  int maxIzq = INT_MIN;
+  for (int i = mid; i >= inicio; i--)
   {
-    suma_temp += arr[i];
-    if (suma_temp > suma_izq)
+    suma += arr[i];
+    if (suma > maxIzq)
     {
-      suma_izq = suma_temp;
-      max_izq = i;
+      maxIzq = suma;
     }
   }
-
-  int suma_der = INT_MIN;
-  suma_temp = 0;
-  int max_der = mid + 1;
-  for (int j = mid + 1; j <= der; j++)
+  // sum der
+  suma = 0;
+  int maxDer = INT_MIN;
+  for (int i = mid + 1; i <= fin; i++)
   {
-    suma_temp += arr[j];
-    if (suma_temp > suma_der)
+    suma += arr[i];
+    if (suma > maxDer)
     {
-      suma_der = suma_temp;
-      max_der = j;
+      maxDer = suma;
     }
   }
-
-  return {suma_izq + suma_der, max_izq, max_der};
+  return maxIzq + maxDer;
 }
 
-Resultado maxSubarrayDC(const vector<int> &arr, int izq, int der)
+int sumaMax(int arr[], int inicio, int fin)
 {
-  if (izq == der)
-  {
-    return {arr[izq], izq, der};
-  }
+  if (fin == inicio)
+    return arr[inicio];
 
-  int mid = (izq + der) / 2;
+  int mid = inicio + (fin - inicio) / 2;
 
-  Resultado res_izq = maxSubarrayDC(arr, izq, mid);
-  Resultado res_der = maxSubarrayDC(arr, mid + 1, der);
-  Resultado res_cruza = maxCruza(arr, izq, mid, der);
+  int maxIzq = sumaMax(arr, inicio, mid);
+  int maxDer = sumaMax(arr, mid + 1, fin);
+  int maxMid = sumaMaxMid(arr, mid, inicio, fin);
 
-  if (res_izq.max_suma >= res_der.max_suma && res_izq.max_suma >= res_cruza.max_suma)
-  {
-    return res_izq;
-  }
-  else if (res_der.max_suma >= res_izq.max_suma && res_der.max_suma >= res_cruza.max_suma)
-  {
-    return res_der;
-  }
-  else
-  {
-    return res_cruza;
-  }
+  return max({maxIzq, maxDer, maxMid});
 }
 
 int main()
 {
-  vector<int> datos = {2, -1, 3, -4, 5, 6, -2, 4, -7, 2};
-  Resultado resultado = maxSubarrayDC(datos, 0, datos.size() - 1);
-
-  cout << "Suma máxima: " << resultado.max_suma << endl;
-  cout << "Intervalo: [" << resultado.inicio << ", " << resultado.fin << "]" << endl;
-
+  int MAX = 10;
+  int datos[] = {2, -1, 3, -4, 5, 6, -2, 4, -7, 2};
+  // int resultado = sumaMax(datos, 0, datos.size() - 1);
+  int maxSuma = sumaMax(datos, 0, MAX - 1);
   return 0;
 }
