@@ -10,29 +10,32 @@ b) Calcule la complejidad temporal.
 #include <iostream>
 using namespace std;
 
-int contieneCupones(int arr[], int i, int j, int x)
+bool contieneCupones(int arr[], int inicio, int fin, int x)
 {
-  if (arr[i] + arr[j] == x)
-  {
-    return true;
-  }
-  if (i == j)
+  if (inicio >= fin)
   {
     return false;
   }
-  if (arr[i] + arr[j] < x)
+  int suma = arr[inicio] + arr[fin];
+  if (suma == x)
   {
-    return contieneCupones(arr, i + 1, j, x);
+    return true;
   }
-  return contieneCupones(arr, i, j - 1, x);
+  else if (suma > x)
+  {
+    return contieneCupones(arr, inicio, fin - 1, x);
+  }
+  else
+  {
+    return contieneCupones(arr, inicio + 1, fin, x);
+  }
 }
-// Complejidad temporal: O(n)
 
 int main()
 {
   int arr[] = {1, 5, 8, 10, 14, 20};
   int n = sizeof(arr) / sizeof(arr[0]);
-  int x = 15;
+  int x = 6;
   bool encontrado = contieneCupones(arr, 0, n - 1, x);
   if (encontrado)
   {

@@ -12,7 +12,6 @@ fueran positivos. ¿Es necesario aplicar la misma técnica en ese caso o existe 
 simple?
 
 maxArr(arr, inicio, fin) {
-  // caso base
   si (inicio == fin)
     return arr[inicio]
 
@@ -95,7 +94,6 @@ int main()
 {
   int MAX = 10;
   int datos[] = {2, -1, 3, -4, 5, 6, -2, 4, -7, 2};
-  // int resultado = sumaMax(datos, 0, datos.size() - 1);
   int maxSuma = sumaMax(datos, 0, MAX - 1);
   return 0;
 }

@@ -13,9 +13,8 @@ using namespace std;
 int encontrarPico(int arr[], int inicio, int fin, int MAX)
 {
   int mid = inicio + (fin - inicio) / 2;
-  bool izquierdaOk = (mid == 0) || (arr[mid - 1] < arr[mid]);
-  bool derechaOk = (mid == MAX - 1) || (arr[mid] > arr[mid + 1]);
-  if (izquierdaOk && derechaOk)
+
+  if ((mid == 0) || (arr[mid - 1] < arr[mid]) && (mid == MAX - 1) || (arr[mid] > arr[mid + 1]))
   {
     return mid;
   }
