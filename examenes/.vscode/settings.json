@@ -1,0 +1,12 @@
+{
+  "files.associations": {
+    "*.ts": "typescript",
+    "*.js": "javascript",
+    "*.astro": "astro",
+    "*.mjs": "javascript",
+    "*.css": "css",
+    "*.tsx": "typescriptreact",
+    "ostream": "cpp",
+    "iostream": "cpp"
+  }
+}
