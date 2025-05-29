@@ -6,6 +6,7 @@ un arreglo de elementos comparables, ordenen sus elementos ascendentemente.
 #include <iostream>
 using namespace std;
 
+
 void intercambiar(int &a, int &b)
 {
   int temp = a;

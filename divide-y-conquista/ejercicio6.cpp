@@ -23,6 +23,8 @@ struct MinMax
   int max;
 };
 
+// solucion iterativo
+
 MinMax encontrarMinMax(int arr[], int n)
 {
   MinMax res = {arr[0], arr[0]};
@@ -37,6 +39,8 @@ MinMax encontrarMinMax(int arr[], int n)
 }
 // O(n)
 
+// Solucion divide y conquista
+
 MinMax encontrarMinMax(int arr[], int inicio, int fin)
 {
   MinMax res;
@@ -50,23 +54,19 @@ MinMax encontrarMinMax(int arr[], int inicio, int fin)
 
   if (fin == inicio + 1)
   {
-    if (arr[inicio] < arr[fin])
-    {
-      res.min = arr[inicio];
-      res.max = arr[fin];
-    }
-    else
-    {
-      res.min = arr[fin];
-      res.max = arr[inicio];
-    }
+    res.min = min(arr[inicio],arr[fin]);
+    res.max = max(arr[inicio], arr[fin]);
     return res;
   }
-
+  
+  // dividir
   int mid = (inicio + fin) / 2;
+
+  // conquistar
   MinMax izquierda = encontrarMinMax(arr, inicio, mid);
   MinMax derecha = encontrarMinMax(arr, mid + 1, fin);
-
+  
+  //
   res.min = min(izquierda.min, derecha.min);
   res.max = max(izquierda.max, derecha.max);
 
@@ -80,5 +80,7 @@ int main()
   int arr[] = {1, 3, 8, 12, 9, 5, 2};
   int n = sizeof(arr) / sizeof(arr[0]);
   MinMax minMax = encontrarMinMax(arr, n); // deberías obtener índice 3
+  cout << "numero minimo: " << minMax.min << endl;
+  cout << "numero maximo: " << minMax.max << endl;
   return 0;
 }
