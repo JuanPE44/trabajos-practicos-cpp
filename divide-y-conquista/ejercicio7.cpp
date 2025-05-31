@@ -12,30 +12,41 @@ using namespace std;
 
 bool contieneCupones(int arr[], int inicio, int fin, int x)
 {
-  if (inicio >= fin)
-  {
+  if(inicio == fin) {
     return false;
   }
-  int suma = arr[inicio] + arr[fin];
-  if (suma == x)
-  {
-    return true;
+
+  if(inicio+1 == fin) {
+    if(arr[inicio] + arr[fin] == x) {
+      return true;
+    }
+    return false;
   }
-  else if (suma > x)
-  {
-    return contieneCupones(arr, inicio, fin - 1, x);
+
+  int mid = (fin+inicio)/2;
+
+  bool sumaIzq = contieneCupones(arr,inicio,mid,x);
+  bool sumaDer = contieneCupones(arr,mid+1,fin,x);
+ 
+  int i = inicio;
+  int j = fin;
+
+  while(i<j) {
+   int suma = arr[i] + arr[j];
+    if (suma == x) return true;
+    else if (suma < x) i++;
+    else j--;
   }
-  else
-  {
-    return contieneCupones(arr, inicio + 1, fin, x);
-  }
+  return false;
 }
+
+
 
 int main()
 {
   int arr[] = {1, 5, 8, 10, 14, 20};
   int n = sizeof(arr) / sizeof(arr[0]);
-  int x = 6;
+  int x = 60;
   bool encontrado = contieneCupones(arr, 0, n - 1, x);
   if (encontrado)
   {
