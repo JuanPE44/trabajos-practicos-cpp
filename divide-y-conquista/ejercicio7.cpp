@@ -10,37 +10,44 @@ b) Calcule la complejidad temporal.
 #include <iostream>
 using namespace std;
 
+bool buscarCupones(int arr[], int inicio, int fin, int x)
+{
+  int i = inicio;
+  int j = fin;
+
+  while (i < j)
+  {
+    int suma = arr[i] + arr[j];
+    if (suma == x)
+      return true;
+    else if (suma < x)
+      i++;
+    else
+      j--;
+  }
+  return false;
+}
+
 bool contieneCupones(int arr[], int inicio, int fin, int x)
 {
-  if(inicio == fin) {
+  if (inicio == fin)
+  {
     return false;
   }
 
-  if(inicio+1 == fin) {
-    if(arr[inicio] + arr[fin] == x) {
+  if (inicio + 1 == fin)
+  {
+    if (arr[inicio] + arr[fin] == x)
+    {
       return true;
     }
     return false;
   }
 
-  int mid = (fin+inicio)/2;
+  int mid = (fin + inicio) / 2;
 
-  bool sumaIzq = contieneCupones(arr,inicio,mid,x);
-  bool sumaDer = contieneCupones(arr,mid+1,fin,x);
- 
-  int i = inicio;
-  int j = fin;
-
-  while(i<j) {
-   int suma = arr[i] + arr[j];
-    if (suma == x) return true;
-    else if (suma < x) i++;
-    else j--;
-  }
-  return false;
+  return (arr, inicio, mid, x) || contieneCupones(arr, mid + 1, fin, x) || buscarCupones(arr, inicio, fin, x);
 }
-
-
 
 int main()
 {
