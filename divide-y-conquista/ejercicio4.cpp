@@ -10,52 +10,51 @@ Implemente un algoritmo en C++ que resuelva el problema en un tiempo O(log n).
 #include <algorithm>
 using namespace std;
 
-int mediana(int a1[], int mina1, int maxa1, int a2[], int mina2, int maxa2)
+int mediana(int a1[], int inicio1, int fin1, int a2[], int inicio2, int fin2)
 {
-  if (maxa1 - mina1 > 2)
-  { // Caso general
-    int med = (maxa1 - mina1) / 2;
-    int posa1 = mina1 + med;
-    int posa2 = mina2 + med;
-
-    if (a1[posa1] == a2[posa2])
+  // Dos elementos
+  if (fin1 == inicio1 + 1)
+  {
+    if (a1[fin1 - 1] < a2[inicio2])
     {
-      return a1[posa1];
+      return a1[fin1 - 1];
     }
-    else if (a1[posa1] < a2[posa2])
+    else if (a2[fin2 - 1] < a1[inicio1])
     {
-      return mediana(a1, mina1 + med, maxa1, a2, mina2, maxa2 - med);
+      return a2[fin2 - 1];
     }
     else
     {
-      return mediana(a1, mina1, maxa1 - med, a2, mina2 + med, maxa2);
+      return max(a1[inicio1], a2[inicio2]);
     }
   }
-  else if (maxa1 - mina1 == 2)
-  { // Dos elementos
-    if (a1[maxa1 - 1] < a2[mina2])
+
+  // Un solo elemento
+  if (inicio1 == fin1)
+  {
+    if (a1[inicio1] < a2[inicio2])
     {
-      return a1[maxa1 - 1];
-    }
-    else if (a2[maxa2 - 1] < a1[mina1])
-    {
-      return a2[maxa2 - 1];
+      return min(a1[inicio1], a2[inicio2]);
     }
     else
     {
-      return max(a1[mina1], a2[mina2]);
+      return min(a2[inicio2], a1[inicio1]);
     }
+  }
+
+  int med = (fin1 + inicio1) / 2;
+
+  if (a1[med] == a2[med])
+  {
+    return a1[med];
+  }
+  else if (a1[med] < a2[med])
+  {
+    return mediana(a1, inicio1, med - 1, a2, inicio2, med - 1);
   }
   else
-  { // Un solo elemento
-    if (a1[mina1] < a2[mina2])
-    {
-      return min(a1[mina1], a2[mina2]);
-    }
-    else
-    {
-      return min(a2[mina2], a1[mina1]);
-    }
+  {
+    return mediana(a1, med + 1, fin1, a2, med + 1, fin2);
   }
 }
 

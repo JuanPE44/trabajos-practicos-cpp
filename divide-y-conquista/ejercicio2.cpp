@@ -12,17 +12,19 @@ using namespace std;
 
 int encontrarIndice(int arr[], int inicio, int fin)
 {
+
   if (inicio > fin)
   {
     return -1;
   }
 
-  int p = (fin - inicio) / 2 + inicio;
+  int p = (fin + inicio) / 2;
 
   if (arr[p] == p)
   {
     return p;
   }
+
   else if (arr[p] > p)
   {
     return encontrarIndice(arr, inicio, p - 1);
@@ -41,3 +43,4 @@ int main()
   cout << i << endl;
   return 0;
 }
+

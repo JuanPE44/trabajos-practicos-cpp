@@ -14,7 +14,7 @@ int encontrarIndiceElemento(int arr[], int inicio, int fin, int elemento)
 {
   if (inicio > fin)
   {
-    return -1;
+    return fin;
   }
 
   int p = (fin - inicio) / 2 + inicio;
@@ -40,14 +40,8 @@ int cantidadElementos(int arr[], int x, int y)
     cout << "x debe ser menor o igual a y";
     return -1;
   }
-
   int elementoX = encontrarIndiceElemento(arr, 0, MAX - 1, x);
   int elementoY = encontrarIndiceElemento(arr, 0, MAX - 1, y);
-
-  if (elementoX == -1 || elementoY == -1)
-  {
-    return -1;
-  }
 
   return (elementoY - elementoX + 1);
 }
